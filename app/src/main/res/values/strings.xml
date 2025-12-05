@@ -13,4 +13,11 @@
     <string name="unpaid">UNPAID</string>
     <string name="due_date_placeholder">Hạn: 2023-12-30</string>
     <string name="amount_placeholder">$50.00</string>
+    <string name="add_new_transaction">Add New Transaction</string>
+    <string name="expense_chi">Expense (Chi)</string>
+    <string name="income_thu">Income (Thu)</string>
+    <string name="expense_title_hint">Expense Title (e.g., Taxi)</string>
+    <string name="amount">Amount</string>
+    <string name="date_yyyy_mm_dd">Date (YYYY-MM-DD)</string>
+    <string name="save">Save</string>
 </resources>

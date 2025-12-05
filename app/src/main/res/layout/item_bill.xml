@@ -47,10 +47,10 @@
 
             <TextView
                 android:id="@+id/tvBillDate"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/due_date_placeholder"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="@string/due_date_placeholder" />
 
             <TextView
                 android:id="@+id/tvBillAmount"
