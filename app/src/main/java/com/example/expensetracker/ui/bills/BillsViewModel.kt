@@ -9,15 +9,19 @@ import kotlinx.coroutines.launch
 
 class BillsViewModel : ViewModel() {
     val bills = MutableLiveData<List<Bill>>()
+    val error = MutableLiveData<String>()
 
     fun loadBills(userId: Int) {
         viewModelScope.launch {
             try {
                 val res = RetrofitClient.instance.getBills(userId)
-                if (res.isSuccessful) {
+                if (res.isSuccessful && res.body()?.status == "success") {
                     bills.value = res.body()?.data ?: emptyList()
+                } else {
+                    bills.value = emptyList()
                 }
             } catch (e: Exception) {
+                error.value = "Connection Error"
                 bills.value = emptyList()
             }
         }
@@ -27,7 +31,7 @@ class BillsViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 RetrofitClient.instance.updateBillStatus(id, status)
-                loadBills(userId) // Load lại sau khi sửa
+                loadBills(userId) // Tải lại ngay sau khi update
             } catch (e: Exception) { }
         }
     }
@@ -36,7 +40,7 @@ class BillsViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 RetrofitClient.instance.deleteBill(id)
-                loadBills(userId) // Load lại sau khi xóa
+                loadBills(userId) // Tải lại ngay sau khi xóa
             } catch (e: Exception) { }
         }
     }

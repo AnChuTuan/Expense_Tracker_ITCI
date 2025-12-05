@@ -2,6 +2,7 @@ package com.example.expensetracker.ui.bills
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,9 +15,8 @@ import com.example.expensetracker.utils.SessionManager
 
 class BillsFragment : Fragment(R.layout.fragment_bills) {
     private lateinit var binding: FragmentBillsBinding
-    private val viewModel: BillsViewModel by viewModels()
+    private val viewModel: BillsViewModel by viewModels() // Dùng viewModels() là đủ nếu có onResume
 
-    // Khởi tạo Adapter với sự kiện click
     private val adapter = BillAdapter { bill ->
         showOptionsDialog(bill)
     }
@@ -24,19 +24,29 @@ class BillsFragment : Fragment(R.layout.fragment_bills) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBillsBinding.bind(view)
-        val userId = SessionManager(requireContext()).getUserId()
 
         binding.rvBills.layoutManager = LinearLayoutManager(context)
         binding.rvBills.adapter = adapter
 
-        viewModel.loadBills(userId)
+        // Observer: Khi data thay đổi thì update list ngay
         viewModel.bills.observe(viewLifecycleOwner) { list ->
             adapter.submitList(list)
+            // Hiển thị thông báo nếu list rỗng
+            if (list.isEmpty()) {
+                // Bạn có thể thêm 1 TextView "No Bills" trong XML và hiện nó lên ở đây
+            }
         }
 
         binding.fabAddBill.setOnClickListener {
             findNavController().navigate(R.id.action_bills_to_addBill)
         }
+    }
+
+    // --- FIX QUAN TRỌNG: LUÔN TẢI LẠI DATA KHI MÀN HÌNH HIỆN RA ---
+    override fun onResume() {
+        super.onResume()
+        val userId = SessionManager(requireContext()).getUserId()
+        viewModel.loadBills(userId)
     }
 
     private fun showOptionsDialog(bill: Bill) {
@@ -47,8 +57,14 @@ class BillsFragment : Fragment(R.layout.fragment_bills) {
             .setTitle(bill.title)
             .setItems(options) { _, which ->
                 when (which) {
-                    0 -> viewModel.updateStatus(bill.id, "PAID", userId)
-                    1 -> viewModel.updateStatus(bill.id, "UNPAID", userId)
+                    0 -> {
+                        viewModel.updateStatus(bill.id, "PAID", userId)
+                        Toast.makeText(context, "Paid!", Toast.LENGTH_SHORT).show()
+                    }
+                    1 -> {
+                        viewModel.updateStatus(bill.id, "UNPAID", userId)
+                        Toast.makeText(context, "Unpaid!", Toast.LENGTH_SHORT).show()
+                    }
                     2 -> confirmDelete(bill.id, userId)
                 }
             }
@@ -58,9 +74,10 @@ class BillsFragment : Fragment(R.layout.fragment_bills) {
     private fun confirmDelete(billId: Int, userId: Int) {
         AlertDialog.Builder(requireContext())
             .setTitle("Delete Bill?")
-            .setMessage("Are you sure you want to delete this bill?")
+            .setMessage("Are you sure?")
             .setPositiveButton("Yes") { _, _ ->
                 viewModel.deleteBill(billId, userId)
+                Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("No", null)
             .show()

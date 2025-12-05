@@ -14,23 +14,25 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
-
+import androidx.fragment.app.activityViewModels
 class StatsFragment : Fragment(R.layout.fragment_stats) {
     private lateinit var binding: FragmentStatsBinding
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStatsBinding.bind(view)
-
-        val userId = SessionManager(requireContext()).getUserId()
-        viewModel.loadExpenses(userId)
 
         viewModel.expenses.observe(viewLifecycleOwner) { list ->
             setupPieChart(list)
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val userId = SessionManager(requireContext()).getUserId()
+        viewModel.loadExpenses(userId)
+    }
     private fun setupPieChart(list: List<Expense>) {
         var income = 0.0f
         var expense = 0.0f

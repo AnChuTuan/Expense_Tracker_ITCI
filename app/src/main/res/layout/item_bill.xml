@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:cardBackgroundColor="#FFF3E0"> <!-- Màu cam nhạt để phân biệt với Expense -->
+    app:cardElevation="2dp"
+    android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,15 +28,16 @@
                 android:text="@string/bill_title_placeholder"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#E65100"/>
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/tvBillStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/unpaid"
+                android:text="@string/unpaid_status"
                 android:textStyle="bold"
-                android:textColor="#D84315"/>
+                android:textSize="14sp"
+                android:textColor="#D32F2F"/>
         </LinearLayout>
 
         <LinearLayout
@@ -47,19 +48,21 @@
 
             <TextView
                 android:id="@+id/tvBillDate"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/due_date_placeholder" />
+                android:text="@string/due_date_placeholder_formatted"
+                android:textSize="14sp"
+                android:textColor="#757575"
+                android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/tvBillAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/amount_placeholder"
+                android:text="@string/amount_placeholder_formatted"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:textColor="#E65100"/>
+                android:textColor="@color/black"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

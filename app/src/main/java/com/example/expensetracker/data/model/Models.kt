@@ -18,6 +18,7 @@ data class Expense(
 
 data class Bill(
     val id: Int,
+    val user_id: Int,
     val title: String,
     val amount: Double,
     val due_date: String,
@@ -41,4 +42,7 @@ data class BaseResponse(
     val message: String
 )
 
-data class BillResponse(val status: String, val data: List<Bill>?)
+data class BillResponse(
+    val status: String,
+    val data: List<Bill>?
+)

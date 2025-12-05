@@ -10,10 +10,10 @@ import com.example.expensetracker.R
 import com.example.expensetracker.data.model.Expense
 import com.example.expensetracker.databinding.FragmentHomeBinding
 import com.example.expensetracker.utils.SessionManager
-
+import androidx.fragment.app.activityViewModels
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
     private val adapter = ExpenseAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,9 +34,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.loadExpenses(userId)
         viewModel.expenses.observe(viewLifecycleOwner) { list ->
-            adapter.submitList(list)
-            calculateStats(list)
+            // Kiểm tra list khác null mới update
+            if (list != null) {
+                adapter.submitList(list)
+                calculateStats(list)
+            }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val userId = SessionManager(requireContext()).getUserId()
+        viewModel.loadExpenses(userId)
     }
 
     private fun calculateStats(list: List<Expense>) {
