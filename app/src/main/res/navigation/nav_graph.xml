@@ -44,4 +44,45 @@
         android:id="@+id/addExpenseFragment"
         android:name="com.example.expensetracker.ui.add_expense.AddExpenseFragment"
         android:label="Add Expense" />
+    <!-- Mở file nav_graph.xml và thêm các khối này vào -->
+
+    <!-- Màn hình danh sách Bill -->
+    <fragment
+        android:id="@+id/billsFragment"
+        android:name="com.example.expensetracker.ui.bills.BillsFragment"
+        android:label="Bills">
+        <action
+            android:id="@+id/action_bills_to_addBill"
+            app:destination="@id/addBillFragment" />
+    </fragment>
+
+    <!-- Màn hình thêm Bill -->
+    <fragment
+        android:id="@+id/addBillFragment"
+        android:name="com.example.expensetracker.ui.bills.AddBillFragment"
+        android:label="Add Bill" />
+
+    <!-- Màn hình thống kê (Nếu bạn đã làm phần Analytics) -->
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="com.example.expensetracker.ui.stats.StatsFragment"
+        android:label="Stats" />
+
+    <!-- Cập nhật HomeFragment để thêm mũi tên trỏ tới 2 màn hình mới -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.expensetracker.ui.home.HomeFragment"
+        android:label="Home">
+        <action
+            android:id="@+id/action_home_to_add"
+            app:destination="@id/addExpenseFragment" />
+
+        <!-- THÊM 2 DÒNG NÀY -->
+        <action
+            android:id="@+id/action_home_to_bills"
+            app:destination="@id/billsFragment" />
+        <action
+            android:id="@+id/action_home_to_stats"
+            app:destination="@id/statsFragment" />
+    </fragment>
 </navigation>

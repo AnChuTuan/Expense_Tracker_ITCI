@@ -37,6 +37,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.fabAdd.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_add)
         }
+
+        binding.btnChart.setOnClickListener {
+            try {
+                findNavController().navigate(R.id.action_home_to_stats)
+            } catch (e: Exception) {
+                android.util.Log.e("NAV_ERROR", "Chưa tạo action trong nav_graph: ${e.message}")
+            }
+        }
+
+        binding.btnBills.setOnClickListener {
+            try {
+                findNavController().navigate(R.id.action_home_to_bills)
+            } catch (e: Exception) {
+                android.util.Log.e("NAV_ERROR", "Chưa tạo action trong nav_graph: ${e.message}")
+            }
+        }
     }
 
     // --- HÀM TÍNH TOÁN (Phải nằm NGOÀI onViewCreated nhưng TRONG class) ---

@@ -16,6 +16,14 @@ data class Expense(
     val type: String
 )
 
+data class Bill(
+    val id: Int,
+    val title: String,
+    val amount: Double,
+    val due_date: String,
+    val status: String
+)
+
 // API Responses
 data class LoginResponse(
     val status: String,
@@ -32,3 +40,5 @@ data class BaseResponse(
     val status: String,
     val message: String
 )
+
+data class BillResponse(val status: String, val data: List<Bill>?)

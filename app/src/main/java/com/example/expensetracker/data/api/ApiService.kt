@@ -32,4 +32,16 @@ interface ApiService {
         @Field("date") d: String,
         @Field("type") type: String
     ): Response<BaseResponse>
+
+    @GET("get_bills.php")
+    suspend fun getBills(@Query("user_id") uid: Int): Response<BillResponse>
+
+    @FormUrlEncoded
+    @POST("add_bill.php")
+    suspend fun addBill(
+        @Field("user_id") uid: Int,
+        @Field("title") t: String,
+        @Field("amount") a: Double,
+        @Field("due_date") d: String
+    ): Response<BaseResponse>
 }
