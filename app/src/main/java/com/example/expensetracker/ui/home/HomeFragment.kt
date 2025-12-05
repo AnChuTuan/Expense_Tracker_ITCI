@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expensetracker.R
-import com.example.expensetracker.data.model.Expense // <--- THÊM DÒNG QUAN TRỌNG NÀY
+import com.example.expensetracker.data.model.Expense
 import com.example.expensetracker.databinding.FragmentHomeBinding
 import com.example.expensetracker.utils.SessionManager
 
@@ -25,44 +25,32 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.rvExpenses.layoutManager = LinearLayoutManager(context)
         binding.rvExpenses.adapter = adapter
 
+        // Bắt sự kiện 3 nút
+        binding.btnChart.setOnClickListener { findNavController().navigate(R.id.action_home_to_stats) }
+        binding.btnBills.setOnClickListener { findNavController().navigate(R.id.action_home_to_bills) }
+        binding.btnSettings.setOnClickListener { findNavController().navigate(R.id.action_home_to_settings) } // Nút mới
+
+        binding.fabAdd.setOnClickListener { findNavController().navigate(R.id.action_home_to_add) }
+
         viewModel.loadExpenses(userId)
-
-        // Quan sát dữ liệu
         viewModel.expenses.observe(viewLifecycleOwner) { list ->
-            // 'list' ở đây là danh sách expense lấy từ API về
             adapter.submitList(list)
-            calculateStats(list) // Gọi hàm tính toán
-        }
-
-        binding.fabAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_home_to_add)
-        }
-
-        binding.btnChart.setOnClickListener {
-            try {
-                findNavController().navigate(R.id.action_home_to_stats)
-            } catch (e: Exception) {
-                android.util.Log.e("NAV_ERROR", "Chưa tạo action trong nav_graph: ${e.message}")
-            }
-        }
-
-        binding.btnBills.setOnClickListener {
-            try {
-                findNavController().navigate(R.id.action_home_to_bills)
-            } catch (e: Exception) {
-                android.util.Log.e("NAV_ERROR", "Chưa tạo action trong nav_graph: ${e.message}")
-            }
+            calculateStats(list)
         }
     }
 
-    // --- HÀM TÍNH TOÁN (Phải nằm NGOÀI onViewCreated nhưng TRONG class) ---
     private fun calculateStats(list: List<Expense>) {
+        // --- LOGIC TÍNH TOÁN & TIỀN TỆ MỚI ---
+        val session = SessionManager(requireContext())
+        val rate = session.getExchangeRate()
+        val symbol = session.getCurrencySymbol()
+        val format = if (session.getCurrency() == "VND") "%,.0f" else "%.2f"
+
         var income = 0.0
         var expense = 0.0
 
         for (item in list) {
-            // Bây giờ nó sẽ hiểu item.type vì đã import Expense ở trên
-            if (item.type == "INCOME") {
+            if ((item.type ?: "EXPENSE") == "INCOME") {
                 income += item.amount
             } else {
                 expense += item.amount
@@ -71,8 +59,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val balance = income - expense
 
-        binding.tvTotalIncome.text = "+ $${income}"
-        binding.tvTotalExpense.text = "- $${expense}"
-        binding.tvTotalBalance.text = "$${balance}"
+        // Nhân tỷ giá khi hiển thị
+        binding.tvTotalIncome.text = "+ $symbol ${format.format(income * rate)}"
+        binding.tvTotalExpense.text = "- $symbol ${format.format(expense * rate)}"
+        binding.tvTotalBalance.text = "$symbol ${format.format(balance * rate)}"
     }
 }

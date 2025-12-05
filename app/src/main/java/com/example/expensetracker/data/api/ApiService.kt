@@ -44,4 +44,12 @@ interface ApiService {
         @Field("amount") a: Double,
         @Field("due_date") d: String
     ): Response<BaseResponse>
+
+    @FormUrlEncoded
+    @POST("update_bill_status.php")
+    suspend fun updateBillStatus(@Field("id") id: Int, @Field("status") status: String): Response<BaseResponse>
+
+    @FormUrlEncoded
+    @POST("delete_bill.php")
+    suspend fun deleteBill(@Field("id") id: Int): Response<BaseResponse>
 }

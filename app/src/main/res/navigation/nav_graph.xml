@@ -1,29 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
+    <!-- 1. Màn hình Đăng nhập -->
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.expensetracker.ui.login.LoginFragment"
-        android:label="Login">
-        <!-- Arrow to Home -->
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+
+        <!-- Chuyển sang Home (Xóa Login khỏi BackStack để không quay lại được) -->
         <action
             android:id="@+id/action_login_to_home"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
-        <!-- Arrow to Register -->
+
+        <!-- Chuyển sang Đăng ký -->
         <action
             android:id="@+id/action_login_to_register"
             app:destination="@id/registerFragment" />
     </fragment>
 
+    <!-- 2. Màn hình Đăng ký -->
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.expensetracker.ui.register.RegisterFragment"
-        android:label="Register">
-        <!-- Arrow back to Login -->
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
+
+        <!-- Quay lại Login sau khi đăng ký xong -->
         <action
             android:id="@+id/action_register_to_login"
             app:destination="@id/loginFragment"
@@ -31,58 +40,73 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+    <!-- 3. Màn hình chính (Dashboard) -->
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.expensetracker.ui.home.HomeFragment"
-        android:label="Home">
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_home">
+
+        <!-- Đi tới Thêm chi tiêu -->
         <action
             android:id="@+id/action_home_to_add"
             app:destination="@id/addExpenseFragment" />
+
+        <!-- Đi tới Biểu đồ (Analytics) -->
+        <action
+            android:id="@+id/action_home_to_stats"
+            app:destination="@id/statsFragment" />
+
+        <!-- Đi tới Hóa đơn (Bills) -->
+        <action
+            android:id="@+id/action_home_to_bills"
+            app:destination="@id/billsFragment" />
+
+        <!-- Đi tới Cài đặt (Settings) -->
+        <action
+            android:id="@+id/action_home_to_settings"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
+    <!-- 4. Màn hình Thêm Chi tiêu/Thu nhập -->
     <fragment
         android:id="@+id/addExpenseFragment"
         android:name="com.example.expensetracker.ui.add_expense.AddExpenseFragment"
-        android:label="Add Expense" />
-    <!-- Mở file nav_graph.xml và thêm các khối này vào -->
+        android:label="Add Expense"
+        tools:layout="@layout/fragment_add_expense" />
 
-    <!-- Màn hình danh sách Bill -->
+    <!-- 5. Màn hình Thống kê (Biểu đồ tròn) -->
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="com.example.expensetracker.ui.stats.StatsFragment"
+        android:label="Financial Analysis"
+        tools:layout="@layout/fragment_stats" />
+
+    <!-- 6. Màn hình Danh sách Hóa đơn -->
     <fragment
         android:id="@+id/billsFragment"
         android:name="com.example.expensetracker.ui.bills.BillsFragment"
-        android:label="Bills">
+        android:label="Upcoming Bills"
+        tools:layout="@layout/fragment_bills">
+
+        <!-- Đi tới Thêm Hóa đơn mới -->
         <action
             android:id="@+id/action_bills_to_addBill"
             app:destination="@id/addBillFragment" />
     </fragment>
 
-    <!-- Màn hình thêm Bill -->
+    <!-- 7. Màn hình Thêm Hóa đơn mới -->
     <fragment
         android:id="@+id/addBillFragment"
         android:name="com.example.expensetracker.ui.bills.AddBillFragment"
-        android:label="Add Bill" />
+        android:label="Add Bill Reminder"
+        tools:layout="@layout/fragment_add_bill" />
 
-    <!-- Màn hình thống kê (Nếu bạn đã làm phần Analytics) -->
+    <!-- 8. Màn hình Cài đặt -->
     <fragment
-        android:id="@+id/statsFragment"
-        android:name="com.example.expensetracker.ui.stats.StatsFragment"
-        android:label="Stats" />
+        android:id="@+id/settingsFragment"
+        android:name="com.example.expensetracker.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
 
-    <!-- Cập nhật HomeFragment để thêm mũi tên trỏ tới 2 màn hình mới -->
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.expensetracker.ui.home.HomeFragment"
-        android:label="Home">
-        <action
-            android:id="@+id/action_home_to_add"
-            app:destination="@id/addExpenseFragment" />
-
-        <!-- THÊM 2 DÒNG NÀY -->
-        <action
-            android:id="@+id/action_home_to_bills"
-            app:destination="@id/billsFragment" />
-        <action
-            android:id="@+id/action_home_to_stats"
-            app:destination="@id/statsFragment" />
-    </fragment>
 </navigation>

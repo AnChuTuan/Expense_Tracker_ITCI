@@ -22,4 +22,22 @@ class BillsViewModel : ViewModel() {
             }
         }
     }
+
+    fun updateStatus(id: Int, status: String, userId: Int) {
+        viewModelScope.launch {
+            try {
+                RetrofitClient.instance.updateBillStatus(id, status)
+                loadBills(userId) // Load lại sau khi sửa
+            } catch (e: Exception) { }
+        }
+    }
+
+    fun deleteBill(id: Int, userId: Int) {
+        viewModelScope.launch {
+            try {
+                RetrofitClient.instance.deleteBill(id)
+                loadBills(userId) // Load lại sau khi xóa
+            } catch (e: Exception) { }
+        }
+    }
 }

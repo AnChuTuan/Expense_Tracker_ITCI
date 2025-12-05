@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expensetracker.data.model.Expense
 import com.example.expensetracker.databinding.ItemExpenseBinding
+import com.example.expensetracker.utils.SessionManager
 
-class ExpenseAdapter : RecyclerView.Adapter<ExpenseAdapter.VH>() {
-    private var list = listOf<Expense>()
+class ExpenseAdapter(private var list: List<Expense> = emptyList()) : RecyclerView.Adapter<ExpenseAdapter.VH>() {
 
     fun submitList(newList: List<Expense>) {
         list = newList
@@ -18,20 +18,29 @@ class ExpenseAdapter : RecyclerView.Adapter<ExpenseAdapter.VH>() {
     class VH(val binding: ItemExpenseBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        return VH(ItemExpenseBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        val binding = ItemExpenseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return VH(binding)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = list[position]
+
+        // --- LOGIC TIỀN TỆ MỚI ---
+        val session = SessionManager(holder.itemView.context)
+        val rate = session.getExchangeRate()
+        val symbol = session.getCurrencySymbol()
+        val displayAmount = item.amount * rate
+        val format = if (session.getCurrency() == "VND") "%,.0f" else "%.2f"
+
         holder.binding.tvTitle.text = item.title
         holder.binding.tvDate.text = item.date
 
-        if (item.type == "INCOME") {
-            holder.binding.tvAmount.text = "+ $${item.amount}"
-            holder.binding.tvAmount.setTextColor(Color.parseColor("#2E7D32")) // Màu xanh lá
+        if ((item.type ?: "EXPENSE") == "INCOME") {
+            holder.binding.tvAmount.text = "+ $symbol ${format.format(displayAmount)}"
+            holder.binding.tvAmount.setTextColor(Color.parseColor("#2E7D32"))
         } else {
-            holder.binding.tvAmount.text = "- $${item.amount}"
-            holder.binding.tvAmount.setTextColor(Color.parseColor("#C62828")) // Màu đỏ
+            holder.binding.tvAmount.text = "- $symbol ${format.format(displayAmount)}"
+            holder.binding.tvAmount.setTextColor(Color.parseColor("#C62828"))
         }
     }
 
