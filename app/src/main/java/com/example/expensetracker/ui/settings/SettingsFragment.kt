@@ -18,7 +18,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding = FragmentSettingsBinding.bind(view)
         val session = SessionManager(requireContext())
 
-        // Load cài đặt hiện tại
+        // load cài đặt
         if (session.getCurrency() == "VND") {
             binding.rbVND.isChecked = true
         } else {
@@ -33,7 +33,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         binding.btnLogout.setOnClickListener {
             session.logout()
-            // Restart App để về Login
+            // restart cho về login screen
             val intent = Intent(requireContext(), MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)

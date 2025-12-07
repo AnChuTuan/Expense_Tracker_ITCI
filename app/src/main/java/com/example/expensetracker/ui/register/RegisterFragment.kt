@@ -18,7 +18,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterBinding.bind(view)
 
-        // Handle Sign Up Button
+        // handle nút sign up
         binding.btnRegister.setOnClickListener {
             val name = binding.etName.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
@@ -31,12 +31,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             }
         }
 
-        // Handle "Already have account" link
+        // handle account tồn tại
         binding.tvLoginLink.setOnClickListener {
             findNavController().navigate(R.id.action_register_to_login)
         }
 
-        // Observer result
+        // kết quả
         viewModel.registerStatus.observe(viewLifecycleOwner) { status ->
             if (status == "Success") {
                 Toast.makeText(context, "Registration Successful! Please Login.", Toast.LENGTH_LONG).show()

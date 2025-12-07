@@ -11,12 +11,12 @@ object RetrofitClient {
 
     private val client = OkHttpClient.Builder()
         .retryOnConnectionFailure(true)
-        .connectTimeout(30, TimeUnit.SECONDS) // Tăng lên 30s
+        .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
         .addInterceptor { chain ->
             val request = chain.request().newBuilder()
-                .header("Cache-Control", "no-cache") // Cấm cache
+                .header("Cache-Control", "no-cache")
                 .header("Connection", "close")
                 .build()
             chain.proceed(request)

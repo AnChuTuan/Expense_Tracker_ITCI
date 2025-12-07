@@ -7,7 +7,7 @@ import com.example.expensetracker.data.api.RetrofitClient
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
-    val registerStatus = MutableLiveData<String?>() // null = idle, "Success" = ok, others = error message
+    val registerStatus = MutableLiveData<String?>() // null = idle, "Success" = ok, khác = error message
 
     fun register(name: String, email: String, pass: String) {
         viewModelScope.launch {

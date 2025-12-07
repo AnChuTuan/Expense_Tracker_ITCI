@@ -25,7 +25,6 @@ class ExpenseAdapter(private var list: List<Expense> = emptyList()) : RecyclerVi
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = list[position]
 
-        // --- LOGIC TIỀN TỆ MỚI ---
         val session = SessionManager(holder.itemView.context)
         val rate = session.getExchangeRate()
         val symbol = session.getCurrencySymbol()

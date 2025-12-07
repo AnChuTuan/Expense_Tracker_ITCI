@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F2F2F2">
 
-    <!-- HEADER -->
+    <!-- phần header -->
     <LinearLayout
         android:id="@+id/headerRow"
         android:layout_width="match_parent"
@@ -46,7 +46,6 @@
             android:contentDescription="@string/bills"
             app:tint="#6200EE" />
 
-        <!-- NÚT SETTINGS MỚI -->
         <ImageButton
             android:id="@+id/btnSettings"
             android:layout_width="36dp"
@@ -58,7 +57,6 @@
             app:tint="#6200EE" />
     </LinearLayout>
 
-    <!-- Các phần còn lại giữ nguyên (Stats, RecyclerView, FAB) -->
     <LinearLayout
         android:id="@+id/layoutStats"
         android:layout_width="match_parent"

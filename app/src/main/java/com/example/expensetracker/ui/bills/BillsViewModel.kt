@@ -11,12 +11,12 @@ import kotlinx.coroutines.launch
 class BillsViewModel : ViewModel() {
     val bills = MutableLiveData<List<Bill>>()
 
-    // Biến này để báo UI biết đang tải hay xong rồi
     val isLoading = MutableLiveData<Boolean>()
 
     fun loadBills(userId: Int) {
         isLoading.value = true
-        Log.d("DEBUG_BILLS", "Bắt đầu tải Bill cho UserID: $userId")
+        //LOGCAT để check bill
+        Log.d("DEBUG_BILLS", "tải bill cho UserID: $userId")
 
         viewModelScope.launch {
             try {
@@ -24,16 +24,16 @@ class BillsViewModel : ViewModel() {
 
                 if (res.isSuccessful && res.body()?.status == "success") {
                     val list = res.body()?.data ?: emptyList()
-                    Log.d("DEBUG_BILLS", "Tải thành công! Số lượng bill: ${list.size}")
+                    Log.d("DEBUG_BILLS", "tải thành công, số lượng bill: ${list.size}")
 
                     // Mẹo: Tạo list mới để Adapter nhận biết sự thay đổi
                     bills.value = ArrayList(list)
                 } else {
-                    Log.e("DEBUG_BILLS", "Lỗi Server trả về: ${res.message()}")
+                    Log.e("DEBUG_BILLS", "lỗi Server trả về: ${res.message()}")
                     bills.value = emptyList()
                 }
             } catch (e: Exception) {
-                Log.e("DEBUG_BILLS", "Lỗi Exception: ${e.message}")
+                Log.e("DEBUG_BILLS", "lỗi Exception: ${e.message}")
                 e.printStackTrace()
                 bills.value = emptyList()
             } finally {
@@ -42,7 +42,6 @@ class BillsViewModel : ViewModel() {
         }
     }
 
-    // ... (Giữ nguyên các hàm update/delete cũ)
     fun updateStatus(id: Int, status: String, userId: Int) {
         viewModelScope.launch { try { RetrofitClient.instance.updateBillStatus(id, status); loadBills(userId) } catch (e: Exception){} }
     }

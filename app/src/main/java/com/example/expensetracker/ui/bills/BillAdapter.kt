@@ -29,20 +29,20 @@ class BillAdapter(
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = list[position]
 
-        // 1. Xử lý Tiền tệ (VND/USD)
+        // handle currency của app
         val session = SessionManager(holder.itemView.context)
         val rate = session.getExchangeRate()
         val symbol = session.getCurrencySymbol()
         val displayAmount = item.amount * rate
         val format = if (session.getCurrency() == "VND") "%,.0f" else "%.2f"
 
-        // 2. Gán dữ liệu
+        // gán data
         holder.binding.tvBillTitle.text = item.title
         holder.binding.tvBillAmount.text = "$symbol ${format.format(displayAmount)}"
         holder.binding.tvBillDate.text = "Due: ${item.due_date}"
         holder.binding.tvBillStatus.text = item.status
 
-        // 3. Đổi màu trạng thái
+        // change màu của status
         if (item.status == "PAID") {
             holder.binding.tvBillStatus.setTextColor(Color.parseColor("#388E3C")) // Xanh đậm
             holder.binding.tvBillTitle.alpha = 0.5f // Làm mờ tiêu đề nếu đã trả
@@ -51,7 +51,7 @@ class BillAdapter(
             holder.binding.tvBillTitle.alpha = 1.0f
         }
 
-        // 4. Sự kiện click
+        // click event
         holder.itemView.setOnClickListener {
             onItemClick(item)
         }

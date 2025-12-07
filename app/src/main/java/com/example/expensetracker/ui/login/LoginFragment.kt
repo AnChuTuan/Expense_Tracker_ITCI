@@ -29,7 +29,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         viewModel.loginResult.observe(viewLifecycleOwner) { res ->
             if (res != null && res.status == "success") {
                 SessionManager(requireContext()).saveUser(res.user!!.id, res.user.full_name)
-                // Navigate to Home
+                // Navigate về Home
                 findNavController().navigate(R.id.action_login_to_home)
             } else {
                 Toast.makeText(context, "Login Failed", Toast.LENGTH_SHORT).show()
@@ -37,7 +37,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         binding.tvRegister.setOnClickListener {
-            // This ID must match the arrow in your nav_graph.xml
             findNavController().navigate(R.id.action_login_to_register)
         }
     }

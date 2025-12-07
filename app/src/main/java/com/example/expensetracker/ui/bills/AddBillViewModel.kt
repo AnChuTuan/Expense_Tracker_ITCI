@@ -12,7 +12,7 @@ class AddBillViewModel : ViewModel() {
     fun addBill(uid: Int, title: String, amount: Double, date: String) {
         viewModelScope.launch {
             try {
-                // Gọi API addBill đã khai báo trong ApiService
+                // gọi api addBill
                 val res = RetrofitClient.instance.addBill(uid, title, amount, date)
                 success.value = res.isSuccessful && res.body()?.status == "success"
             } catch (e: Exception) {

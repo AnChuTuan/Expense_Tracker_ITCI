@@ -33,7 +33,7 @@ class AddBillFragment : Fragment(R.layout.fragment_add_bill) {
         viewModel.success.observe(viewLifecycleOwner) { isSuccess ->
             if (isSuccess) {
                 Toast.makeText(context, "Bill Added!", Toast.LENGTH_SHORT).show()
-                findNavController().popBackStack() // Quay lại danh sách bill
+                findNavController().popBackStack() // back về bill list
             } else {
                 Toast.makeText(context, "Error saving bill", Toast.LENGTH_SHORT).show()
             }

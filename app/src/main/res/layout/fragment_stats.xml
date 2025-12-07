@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Biểu đồ tròn -->
+    <!-- chart bên tab analytics -->
     <TextView
         android:id="@+id/tvHeaderStats"
         android:layout_width="wrap_content"

@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels // Dùng viewModels + onResume là đủ
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expensetracker.R
@@ -26,30 +26,26 @@ class BillsFragment : Fragment(R.layout.fragment_bills) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBillsBinding.bind(view)
 
-        // Setup RecyclerView
         binding.rvBills.layoutManager = LinearLayoutManager(context)
         binding.rvBills.adapter = adapter
 
-        // Thêm Text thông báo nếu list rỗng (Bạn có thể thêm TextView này vào XML nếu muốn)
-        // binding.tvEmpty.visibility = View.GONE
-
-        // 1. Quan sát dữ liệu Bill
+        // check data của bill
         viewModel.bills.observe(viewLifecycleOwner) { list ->
             Log.d("DEBUG_BILLS", "UI nhận được list size: ${list.size}")
             adapter.submitList(list)
 
-            // Nếu list rỗng thì hiện Toast báo
+            // noti báo nếu list rỗng
             if (list.isEmpty()) {
-                // Toast.makeText(context, "No bills found", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "No bills found", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // 2. Quan sát trạng thái Loading (Tùy chọn: Hiện ProgressBar nếu có)
+        // check loading
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
-                // binding.progressBar.visibility = View.VISIBLE
+
             } else {
-                // binding.progressBar.visibility = View.GONE
+
             }
         }
 
@@ -58,7 +54,6 @@ class BillsFragment : Fragment(R.layout.fragment_bills) {
         }
     }
 
-    // --- FIX QUAN TRỌNG: LUÔN LOAD LẠI DATA ---
     override fun onResume() {
         super.onResume()
         val userId = SessionManager(requireContext()).getUserId()
@@ -72,7 +67,6 @@ class BillsFragment : Fragment(R.layout.fragment_bills) {
     }
 
     private fun showOptionsDialog(bill: Bill) {
-        // ... (Code cũ giữ nguyên)
         val options = arrayOf("Mark as PAID", "Mark as UNPAID", "DELETE Bill")
         val userId = SessionManager(requireContext()).getUserId()
         AlertDialog.Builder(requireContext())

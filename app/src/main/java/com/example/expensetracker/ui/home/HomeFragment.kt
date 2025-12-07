@@ -25,16 +25,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.rvExpenses.layoutManager = LinearLayoutManager(context)
         binding.rvExpenses.adapter = adapter
 
-        // Bắt sự kiện 3 nút
+        // 3 nút event
         binding.btnChart.setOnClickListener { findNavController().navigate(R.id.action_home_to_stats) }
         binding.btnBills.setOnClickListener { findNavController().navigate(R.id.action_home_to_bills) }
-        binding.btnSettings.setOnClickListener { findNavController().navigate(R.id.action_home_to_settings) } // Nút mới
+        binding.btnSettings.setOnClickListener { findNavController().navigate(R.id.action_home_to_settings) }
 
         binding.fabAdd.setOnClickListener { findNavController().navigate(R.id.action_home_to_add) }
 
         viewModel.loadExpenses(userId)
         viewModel.expenses.observe(viewLifecycleOwner) { list ->
-            // Kiểm tra list khác null mới update
             if (list != null) {
                 adapter.submitList(list)
                 calculateStats(list)
@@ -49,7 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun calculateStats(list: List<Expense>) {
-        // --- LOGIC TÍNH TOÁN & TIỀN TỆ MỚI ---
+        // currency tính toán
         val session = SessionManager(requireContext())
         val rate = session.getExchangeRate()
         val symbol = session.getCurrencySymbol()
@@ -68,7 +67,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val balance = income - expense
 
-        // Nhân tỷ giá khi hiển thị
+        // nhân tỷ giá tiền
         binding.tvTotalIncome.text = "+ $symbol ${format.format(income * rate)}"
         binding.tvTotalExpense.text = "- $symbol ${format.format(expense * rate)}"
         binding.tvTotalBalance.text = "$symbol ${format.format(balance * rate)}"
