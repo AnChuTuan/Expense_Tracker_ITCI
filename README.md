@@ -1,13 +1,20 @@
-# Expense Tracker & Reminder App
+Here is a professional and detailed **README.md** file for your project.
+
+You can create a file named `README.md` in the root folder of your project, copy the content below, and paste it in. I have added placeholders (like `[Your Name]`) that you should fill in before uploading.
+
+---
+
+```markdown
+# Expense Tracker & Reminder App 💰📅
 
 A comprehensive Android application designed to help users manage their personal finances, track daily income and expenses, analyze spending habits via charts, and manage upcoming bill reminders.
 
-This project uses a **Client-Server Architecture** with a native Android Client (Kotlin) and a custom Backend API (PHP/MySQL).
+This project uses a **Client-Server Architecture** (Option B) with a native Android Client (Kotlin) and a custom Backend API (PHP/MySQL).
 
 ![Project Banner](screenshots/banner.png) 
 *(Note: Upload screenshots to a 'screenshots' folder in your repo and link them here)*
 
-## Features
+## 📱 Features
 
 *   **User Authentication:** Secure Login and Registration system using MySQL.
 *   **Dashboard:** Real-time overview of Total Income, Total Expense, and Current Balance.
@@ -19,7 +26,7 @@ This project uses a **Client-Server Architecture** with a native Android Client 
     *   **Logout:** Securely clear user session.
 *   **Online Storage:** All data is synced to a MySQL database via RESTful APIs.
 
-## Tech Stack
+## 🛠 Tech Stack
 
 ### Android Client
 *   **Language:** Kotlin
@@ -35,7 +42,7 @@ This project uses a **Client-Server Architecture** with a native Android Client 
 *   **Database:** MySQL
 *   **Format:** JSON
 
-## Installation & Setup Guide
+## 🚀 Installation & Setup Guide
 
 Since this project uses a local server, follow these steps strictly to run the app.
 
@@ -88,3 +95,79 @@ CREATE TABLE bills (
     status VARCHAR(20) DEFAULT 'UNPAID',
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+```
+</details>
+
+3.  **Check Connection:**
+    *   Open your browser and visit: `http://localhost/expense_api/db_connect.php`
+    *   If the page is **Blank/White**, the connection is successful.
+    *   If you see an error, check your `db_connect.php` file (username/password).
+
+### Step 2: Android Setup
+
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/[your-username]/expense-tracker-app.git
+    ```
+2.  **Open in Android Studio:**
+    *   Open Android Studio -> File -> Open -> Select the project folder.
+    *   Let Gradle sync completely.
+
+3.  **Configure IP Address (Crucial):**
+    *   The app is configured to work with the **Android Emulator**.
+    *   In `data/api/RetrofitClient.kt`, ensure the Base URL is:
+        ```kotlin
+        private const val BASE_URL = "http://10.0.2.2/expense_api/"
+        ```
+    *   *Note: `10.0.2.2` is the special IP that allows the Emulator to access your computer's localhost.*
+
+4.  **Run the App:**
+    *   Select an Emulator (e.g., Pixel 4 API 33).
+    *   Click the **Run** (Play) button.
+
+## 📂 Project Structure
+
+```
+com.example.expensetracker
+├── data                # Data Layer
+│   ├── api             # Retrofit Service & Client
+│   └── model           # Data Classes (User, Expense, Bill)
+├── ui                  # UI Layer (Fragments & ViewModels)
+│   ├── login           # Authentication
+│   ├── home            # Dashboard & Expense List
+│   ├── stats           # Charts & Analytics
+│   ├── bills           # Bill Reminders
+│   ├── settings        # Currency & Logout
+│   └── MainActivity.kt # Container Activity
+├── utils               # Utilities (SessionManager)
+└── worker              # Background Workers
+```
+
+## 📸 Screenshots
+
+| Login | Dashboard | Analytics | Bills |
+|:---:|:---:|:---:|:---:|
+| ![Login](screenshots/login_thumb.png) | ![Home](screenshots/home_thumb.png) | ![Stats](screenshots/stats_thumb.png) | ![Bills](screenshots/bills_thumb.png) |
+
+*(Remember to replace these paths with actual image files)*
+
+## 👥 Contributors
+
+*   **[Student Name 1]** - Backend Logic & Database
+*   **[Student Name 2]** - UI/UX Design & Navigation
+*   **[Student Name 3]** - Advanced Features (Analytics, Bills)
+
+## 📄 License
+
+This project is created for educational purposes as part of the Mobile Device Application Development course.
+
+---
+```
+
+### **How to prepare your project for GitHub:**
+
+1.  **Clean the project:** inside Android Studio, go to **Build > Clean Project**. This reduces the file size.
+2.  **Create a folder named `backend` (or `php_api`)** inside your project folder and copy all your PHP files there. This ensures the backend code is saved on GitHub too.
+3.  **Create a folder named `database`** and save your SQL code into a file named `schema.sql`.
+4.  **Take Screenshots:** Run your app, take screenshots of the 4 main screens, put them in a folder named `screenshots`, and link them in the README.
+5.  **Upload:** Use Git to push everything to GitHub.
