@@ -2,7 +2,7 @@
 
 A comprehensive Android application designed to help users manage their personal finances, track daily income and expenses, analyze spending habits via charts, and manage upcoming bill reminders.
 
-This project uses a **Client-Server Architecture** (Option B) with a native Android Client (Kotlin) and a custom Backend API (PHP/MySQL).
+This project uses a **Client-Server Architecture** with a native Android Client (Kotlin) and a custom Backend API (PHP/MySQL).
 
 ![Project Banner](Additional_Files/screenshots/banner.png) 
 
