@@ -1,13 +1,13 @@
-# Expense Tracker & Reminder App 💰📅
+# Expense Tracker & Reminder App
 
 A comprehensive Android application designed to help users manage their personal finances, track daily income and expenses, analyze spending habits via charts, and manage upcoming bill reminders.
 
-This project uses a **Client-Server Architecture** (Option B) with a native Android Client (Kotlin) and a custom Backend API (PHP/MySQL).
+This project uses a **Client-Server Architecture** with a native Android Client (Kotlin) and a custom Backend API (PHP/MySQL).
 
 ![Project Banner](screenshots/banner.png) 
 *(Note: Upload screenshots to a 'screenshots' folder in your repo and link them here)*
 
-## 📱 Features
+## Features
 
 *   **User Authentication:** Secure Login and Registration system using MySQL.
 *   **Dashboard:** Real-time overview of Total Income, Total Expense, and Current Balance.
@@ -19,7 +19,7 @@ This project uses a **Client-Server Architecture** (Option B) with a native Andr
     *   **Logout:** Securely clear user session.
 *   **Online Storage:** All data is synced to a MySQL database via RESTful APIs.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Android Client
 *   **Language:** Kotlin
@@ -35,7 +35,7 @@ This project uses a **Client-Server Architecture** (Option B) with a native Andr
 *   **Database:** MySQL
 *   **Format:** JSON
 
-## 🚀 Installation & Setup Guide
+## Installation & Setup Guide
 
 Since this project uses a local server, follow these steps strictly to run the app.
 
