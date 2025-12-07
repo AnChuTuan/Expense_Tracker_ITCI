@@ -51,7 +51,7 @@ Since this project uses a local server, follow these steps strictly to run the a
         *   **WampServer:** `C:\wamp64\www\expense_api\`
 
 2.  **Database Configuration:**
-    *   Start your WampServer/XAMPP (Ensure Apache and MySQL are green).
+    *   Start your WampServer (Ensure Apache and MySQL are green).
     *   Open **phpMyAdmin** in your browser (`http://localhost/phpmyadmin`).
     *   Create a new database named: `expense_tracker_db`.
     *   Click on the SQL tab and run the script found in `Additional_Files\schema.sql`
