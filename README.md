@@ -1,11 +1,4 @@
-Here is a professional and detailed **README.md** file for your project.
-
-You can create a file named `README.md` in the root folder of your project, copy the content below, and paste it in. I have added placeholders (like `[Your Name]`) that you should fill in before uploading.
-
----
-
-```markdown
-# Expense Tracker & Reminder App 💰📅
+# Expense Tracker & Reminder App
 
 A comprehensive Android application designed to help users manage their personal finances, track daily income and expenses, analyze spending habits via charts, and manage upcoming bill reminders.
 
@@ -14,7 +7,7 @@ This project uses a **Client-Server Architecture** (Option B) with a native Andr
 ![Project Banner](screenshots/banner.png) 
 *(Note: Upload screenshots to a 'screenshots' folder in your repo and link them here)*
 
-## 📱 Features
+## Features
 
 *   **User Authentication:** Secure Login and Registration system using MySQL.
 *   **Dashboard:** Real-time overview of Total Income, Total Expense, and Current Balance.
@@ -26,7 +19,7 @@ This project uses a **Client-Server Architecture** (Option B) with a native Andr
     *   **Logout:** Securely clear user session.
 *   **Online Storage:** All data is synced to a MySQL database via RESTful APIs.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Android Client
 *   **Language:** Kotlin
@@ -42,7 +35,7 @@ This project uses a **Client-Server Architecture** (Option B) with a native Andr
 *   **Database:** MySQL
 *   **Format:** JSON
 
-## 🚀 Installation & Setup Guide
+## Installation & Setup Guide
 
 Since this project uses a local server, follow these steps strictly to run the app.
 
@@ -153,7 +146,7 @@ com.example.expensetracker
 
 ## 👥 Contributors
 
-*   **[Student Name 1]** - Backend Logic & Database
+*   **[Student Name 1]** - Team Lead - Backend Logic & Database
 *   **[Student Name 2]** - UI/UX Design & Navigation
 *   **[Student Name 3]** - Advanced Features (Analytics, Bills)
 
@@ -162,12 +155,4 @@ com.example.expensetracker
 This project is created for educational purposes as part of the Mobile Device Application Development course.
 
 ---
-```
 
-### **How to prepare your project for GitHub:**
-
-1.  **Clean the project:** inside Android Studio, go to **Build > Clean Project**. This reduces the file size.
-2.  **Create a folder named `backend` (or `php_api`)** inside your project folder and copy all your PHP files there. This ensures the backend code is saved on GitHub too.
-3.  **Create a folder named `database`** and save your SQL code into a file named `schema.sql`.
-4.  **Take Screenshots:** Run your app, take screenshots of the 4 main screens, put them in a folder named `screenshots`, and link them in the README.
-5.  **Upload:** Use Git to push everything to GitHub.
