@@ -4,8 +4,7 @@ A comprehensive Android application designed to help users manage their personal
 
 This project uses a **Client-Server Architecture** (Option B) with a native Android Client (Kotlin) and a custom Backend API (PHP/MySQL).
 
-![Project Banner](screenshots/banner.png) 
-*(Note: Upload screenshots to a 'screenshots' folder in your repo and link them here)*
+![Project Banner](Additional_Files/screenshots/banner.png) 
 
 ## Features
 
@@ -30,7 +29,7 @@ This project uses a **Client-Server Architecture** (Option B) with a native Andr
 *   **Chart Library:** MPAndroidChart
 
 ### Backend
-*   **Server:** Apache (via WampServer/XAMPP)
+*   **Server:** Apache (via WampServer)
 *   **Language:** PHP 8.0+
 *   **Database:** MySQL
 *   **Format:** JSON
@@ -41,7 +40,7 @@ Since this project uses a local server, follow these steps strictly to run the a
 
 ### Prerequisites
 1.  **Android Studio** (Koala/Ladybug or newer).
-2.  **WampServer** (recommended) or XAMPP installed on your PC.
+2.  **WampServer**
 3.  **Git** installed.
 
 ### Step 1: Backend Setup (PHP & MySQL)
@@ -50,46 +49,12 @@ Since this project uses a local server, follow these steps strictly to run the a
     *   Navigate to the `backend/` folder in this repository (or copy the PHP files provided in the source code).
     *   Copy the folder `expense_api` into your server's root directory:
         *   **WampServer:** `C:\wamp64\www\expense_api\`
-        *   **XAMPP:** `C:\xampp\htdocs\expense_api\`
 
 2.  **Database Configuration:**
     *   Start your WampServer/XAMPP (Ensure Apache and MySQL are green).
     *   Open **phpMyAdmin** in your browser (`http://localhost/phpmyadmin`).
     *   Create a new database named: `expense_tracker_db`.
-    *   Click on the SQL tab and run the script found in `database/schema.sql` (or copy the SQL below):
-
-<details>
-<summary>Click to view SQL Script</summary>
-
-```sql
-CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    full_name VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE expenses (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    title VARCHAR(100) NOT NULL,
-    amount DOUBLE NOT NULL,
-    date DATE NOT NULL,
-    type VARCHAR(10) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE bills (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    title VARCHAR(100) NOT NULL,
-    amount DOUBLE NOT NULL,
-    due_date DATE NOT NULL,
-    status VARCHAR(20) DEFAULT 'UNPAID',
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-```
-</details>
+    *   Click on the SQL tab and run the script found in `Additional_Files\schema.sql`
 
 3.  **Check Connection:**
     *   Open your browser and visit: `http://localhost/expense_api/db_connect.php`
@@ -100,7 +65,7 @@ CREATE TABLE bills (
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/[your-username]/expense-tracker-app.git
+    git clone https://github.com/AnChuTuan/Expense_Tracker_ITCI
     ```
 2.  **Open in Android Studio:**
     *   Open Android Studio -> File -> Open -> Select the project folder.
@@ -118,7 +83,7 @@ CREATE TABLE bills (
     *   Select an Emulator (e.g., Pixel 4 API 33).
     *   Click the **Run** (Play) button.
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 com.example.expensetracker
@@ -136,23 +101,21 @@ com.example.expensetracker
 └── worker              # Background Workers
 ```
 
-## 📸 Screenshots
+## Screenshots
 
 | Login | Dashboard | Analytics | Bills |
 |:---:|:---:|:---:|:---:|
-| ![Login](screenshots/login_thumb.png) | ![Home](screenshots/home_thumb.png) | ![Stats](screenshots/stats_thumb.png) | ![Bills](screenshots/bills_thumb.png) |
+| ![Login](Additional_Files/screenshots/login_thumb.png) | ![Home](Additional_Files/screenshots/home_thumb.png) | ![Stats](Additional_Files/screenshots/stats_thumb.png) | ![Bills](Additional_Files/screenshots/bills_thumb.png) |
 
-*(Remember to replace these paths with actual image files)*
+## Contributors
 
-## 👥 Contributors
+*   **Chu Tuan An** - Team Lead - Backend Logic & Database
+*   **Le Khanh Thanh** - UI/UX Design & Navigation
+*   **Duong Tan Tai** - Advanced Features (Analytics, Bills)
 
-*   **[Student Name 1]** - Team Lead - Backend Logic & Database
-*   **[Student Name 2]** - UI/UX Design & Navigation
-*   **[Student Name 3]** - Advanced Features (Analytics, Bills)
+## License
 
-## 📄 License
-
-This project is created for educational purposes as part of the Mobile Device Application Development course.
+This project is created for educational purposes as part of the Mobile Device Application Development course, International Training & Cooperation Institute, East Asia University of Technology
 
 ---
 
