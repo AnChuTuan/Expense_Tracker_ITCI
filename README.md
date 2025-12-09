@@ -83,6 +83,11 @@ Since this project uses a local server, follow these steps strictly to run the a
     *   Select an Emulator (e.g., Pixel 4 API 33).
     *   Click the **Run** (Play) button.
 
+## SAMPLE ACCOUNT
+| Login | Dashboard |
+|:---:|:---:|
+| demo@gmail.com | 123456 |
+
 ## Project Structure
 
 ```
