@@ -84,7 +84,7 @@ Since this project uses a local server, follow these steps strictly to run the a
     *   Click the **Run** (Play) button.
 
 ## SAMPLE ACCOUNT
-| Login | Dashboard |
+| Email | Password |
 |:---:|:---:|
 | demo@gmail.com | 123456 |
 
