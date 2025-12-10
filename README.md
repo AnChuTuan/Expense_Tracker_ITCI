@@ -46,7 +46,7 @@ Since this project uses a local server, follow these steps strictly to run the a
 ### Step 1: Backend Setup (PHP & MySQL)
 
 1.  **Locate the API Code:**
-    *   Navigate to the `backend/` folder in this repository (or copy the PHP files provided in the source code).
+    *   Navigate to the `Additional_Files` folder in this repository.
     *   Copy the folder `expense_api` into your server's root directory:
         *   **WampServer:** `C:\wamp64\www\expense_api\`
 
